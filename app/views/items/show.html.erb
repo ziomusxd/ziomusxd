@@ -1,0 +1,26 @@
+
+<div class="page-header">
+  <h1>Item</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Nazwa</strong></dt>
+  <dd><%= @item.name %></dd>
+  <dt><strong>Sn</strong></dt>
+  <dd><%= @item.sn %></dd>
+  <dt><strong>Sala</strong></dt>
+  <dd><%= @item.hall %></dd>
+  <dt><strong>Zawód</strong></dt>
+  <dd><%= @item.proffesion %></dd>
+  <dt><strong>Miasto</strong></dt>
+  <dd><%= @item.city %></dd>
+  <dt><strong>Ilość</strong></dt>
+  <dd><%= @item.quantity %></dd>
+  <dt><strong>Uwagi</strong></dt>
+  <dd><%= @item.description %></dd>
+  <dt><strong>Kategoria</strong></dt>
+  <dd><%= @item.category.name %></dd>
+  <dt><strong>Zdjęcie</strong></dt>
+  <dd><%= image_tag @item.avatar %></dd>
+
+<%= link_to 'Wróć', items_path, :class => 'btn btn-default' %>

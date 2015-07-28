@@ -1,0 +1,40 @@
+<%- model_class = Item -%>
+<div class="page-header">
+  <h1>Spis</h1>
+</div>
+
+<%= link_to 'Wróć', root_path, :class => 'btn btn-default' %><br><br>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>SN</th>
+	  <th>Zawód</th>
+      <th>Sala</th>
+      <th>Miasto</th>
+      <th>Ilość</th>
+      <th>Uwagi</th>
+      <th>Kategoria</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name.truncate(30) %></td>
+        <td><%= item.sn.truncate(20) %></td>
+        <td><%= item.proffesion %></td>
+        <td><%= item.hall %></td>
+        <td><%= item.city %></td>
+        <td><%= item.quantity %></td>
+        <td><%= item.description.truncate(10) %></td>
+        <td><%= item.category.name %></td>
+        <td>
+			<%= link_to 'Pokaż', item_path(item), :class => 'btn btn-default btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @items %>

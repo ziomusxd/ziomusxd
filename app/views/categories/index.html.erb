@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>Kategorie</h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nazwa</th>
+	  <th>Uwagi</th>
+    </tr>
+  </thead>
+  <tbody>	     
+  <% @categories.each do |category| %>
+    <tr>
+      <td><%=link_to category.name, category_path(category) %></td>
+      <td><%= category.description%></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Wróć', root_path, :class => 'btn btn-default' %>
+	  
+<div class="container">
+<% @categories.each do |category| %>
+<%= link_to image_tag(category.avatar(:thumb)), category_path(category) %>
+<% end %>
+<div>

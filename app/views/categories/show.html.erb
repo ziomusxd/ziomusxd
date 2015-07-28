@@ -1,0 +1,52 @@
+
+<div class="page-header">
+  <h1>Item</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>ID</strong></dt>
+  <dd><%= @category.id %></dd>
+  <dt><strong>Nazwa</strong></dt>
+  <dd><%= @category.name %></dd>
+  <dt><strong>Uwagi</strong></dt>
+  <dd><%= @category.description %></dd>
+  
+  <br>
+  <%= link_to 'Wróć', categories_path, :class => 'btn btn-default' %>
+  <br><br>
+
+<div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>SN</th>
+      <th>Sala</th>
+      <th>Zawód</th>
+      <th>Miasto</th>
+      <th>Ilość</th>
+      <th>Uwagi</th>
+      <th>Kategoria</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name.truncate(30) %></td>
+        <td><%= item.sn.truncate(20) %></td>
+        <td><%= item.hall %></td>
+        <td><%= item.proffesion %></td>
+        <td><%= item.city %></td>
+        <td><%= item.quantity %></td>
+        <td><%= item.description.truncate(10) %></td>
+        <td><%= item.category.name %></td>
+        <td>
+			<%= link_to 'Pokaż', item_path(item), :class => 'btn btn-default btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @items %>
+</div>
