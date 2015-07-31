@@ -12,8 +12,7 @@
   <dd><%= @category.description %></dd>
   
   <br>
-  <%= link_to 'Wróć', categories_path, :class => 'btn btn-default' %>
-  <br><br>
+
 
 <div>
 <table class="table table-striped table-hover">
@@ -41,12 +40,11 @@
         <td><%= item.quantity %></td>
         <td><%= item.description.truncate(10) %></td>
         <td><%= item.category.name %></td>
-        <td>
-			<%= link_to 'Pokaż', item_path(item), :class => 'btn btn-default btn-xs' %>
-        </td>
+			  <td style="width:80px"> <%= link_to image_tag("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/96/button-round-play-icon.png",:width=>30,:height=>30, :border=>0), item_path(item) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+  <%= link_to image_tag("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/96/button-round-fast-backward-icon.png",:width=>50,:height=>50, :border=>0), categories_path %> 
 <%= will_paginate @items %>
 </div>
