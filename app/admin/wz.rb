@@ -26,8 +26,6 @@ form do |f|
 end
 
 
-
-
 permit_params :user_id, :quantity, :item_id, :where
 #active_admin_importable
   controller do
