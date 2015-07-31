@@ -30,7 +30,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+ gem 'capistrano-rails', group: :development
 # paperclip
 gem "paperclip", "~> 4.3"
 
@@ -64,3 +64,4 @@ end
 group :production do
   gem 'rails_12factor'
 end
+gem 'rvm-capistrano'

@@ -16,7 +16,10 @@
         <%= link_to "Zawodowcy", root_path, id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
+			<li><%= link_to "Kategorie", categories_path %></li>
+			<li><%= link_to "Przedmioty", items_path %></li>
             <li><%= link_to "Home",   root_path %></li>
+			<li><%= link_to "Admin", new_admin_user_session_path %></li>
           </ul>
         </nav>
       </div>

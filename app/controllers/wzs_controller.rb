@@ -1,0 +1,2 @@
+class WzsController < ApplicationController
+end
