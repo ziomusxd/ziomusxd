@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   resources :items
   resources :categories
   resources :explos
-
   resources :users
-
   resources :adoptions 
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
   
   

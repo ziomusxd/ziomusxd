@@ -1,2 +1,24 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<% provide(:title, "Log in") %>
+<h2>Logowanie</h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:session, url: login_path) do |f| %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label "Hasło" %>
+      <%= f.password_field :password, class: 'form-control' %><br>
+	  
+      <%= f.label :remember_me, class: "checkbox inline" do %>
+        <%= f.check_box :remember_me %>
+        <span>Zapamiętaj mnie!</span>
+      <% end %>
+
+      <%= f.submit "Zaloguj", class: "btn btn-primary" %>
+    <% end %><br>
+
+    <p>Nowy tutaj? <%= link_to "Załóż konto!", new_user_path %></p>
+  </div>
+</div>
