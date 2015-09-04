@@ -6,11 +6,11 @@ Rails.application.routes.draw do
   resources :items
   resources :categories
   resources :explos
-<<<<<<< HEAD
+
   resources :users
-=======
+
   resources :adoptions 
->>>>>>> your_branch
+
   
   
   root'home#index'
