@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :items
   resources :categories
-    
+  resources :explos
+  resources :adoptions
+  resources :users    
   
   
   root'home#index'

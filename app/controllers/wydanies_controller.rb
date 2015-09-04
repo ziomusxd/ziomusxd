@@ -1,0 +1,2 @@
+class WydaniesController < ApplicationController
+end
