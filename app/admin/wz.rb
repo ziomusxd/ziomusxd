@@ -14,27 +14,39 @@ ActiveAdmin.register Wz do
 # end
 
 
+index do
+  column "ID", :id
+  column "Użytkownik", :user
+  column "Lokalizacja", :location
+  column "Item", :item
+  column "Utworzone", :created_at
+  actions defaults: true
+end
+
 
 form do |f|
   inputs 'Dane' do 
-    input :user_id, label: "Kto", :as => :select, :collection => User.all.map {|u| ["#{u.name}", u.id]}
-    input :where, label: "Gdzie"
+    input :admin_user_id, label: "Kto", :as => :select, :collection => AdminUser.all.map {|u| ["#{u.name + " " + u.surname}", u.id]}   
+    input :user_id, label: "Komu", :as => :select, :collection => User.all.map {|u| ["#{u.name}", u.id]}
     input :item_id, label: "SN", :as => :select, :collection => Item.all.map {|u| ["#{u.sn}", u.id]}
-    input :quantity, label: "Ilosc sztuk"
+    input :location_id, label: "Lokalizacja", :as => :select, :collection => Location.all.map {|u| ["#{u.name}", u.id]}
+    input :status_id, label: "Status", :as => :select, :collection => Status.all.map {|u| ["#{u.name}", u.id]}    
     actions
   end
 end
 
 
-permit_params :user_id, :quantity, :item_id, :where
+permit_params :user_id, :item_id, :location_id, :admin_user_id, :status_id
 #active_admin_importable
   controller do
 
     def create
       @wz = Wz.new (permitted_params[:wz])
+      Item.find_by_id(@wz.item_id).update_column(:location_id, @wz.location_id)
       create!(:notice => "Dude! Nice job creating that vategory.") { admin_wzs_path }
     end
   end
+
 
 
 end

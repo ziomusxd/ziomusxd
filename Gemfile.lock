@@ -253,6 +253,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  bcrypt
   bootstrap-sass
   byebug
   capistrano-rails

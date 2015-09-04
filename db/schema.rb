@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731185316) do
+ActiveRecord::Schema.define(version: 20150904140329) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -41,10 +41,28 @@ ActiveRecord::Schema.define(version: 20150731185316) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "name",                   limit: 255
+    t.string   "surname",                limit: 255
+    t.string   "adres",                  limit: 255
+    t.integer  "tel",                    limit: 4
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "adoptions", force: :cascade do |t|
+    t.integer  "admin_user_id", limit: 4
+    t.integer  "explo_id",      limit: 4
+    t.integer  "quantity",      limit: 4
+    t.string   "description",   limit: 255
+    t.string   "name",          limit: 255
+    t.string   "sn",            limit: 255
+    t.string   "regal",         limit: 255
+    t.string   "polka",         limit: 255
+    t.string   "unit_id",       limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",                limit: 255
@@ -57,12 +75,23 @@ ActiveRecord::Schema.define(version: 20150731185316) do
     t.datetime "avatar_updated_at"
   end
 
+  create_table "explos", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "sn",          limit: 255
+    t.string   "regal",       limit: 255
+    t.string   "polka",       limit: 255
+    t.integer  "quantity",    limit: 4
+    t.string   "description", limit: 255
+    t.string   "unit_id",     limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "adoption_id", limit: 4
+    t.integer  "explo_id",    limit: 4
+  end
+
   create_table "items", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.string   "sn",                  limit: 255
-    t.string   "hall",                limit: 255
-    t.string   "proffesion",          limit: 255
-    t.string   "city",                limit: 255
     t.integer  "quantity",            limit: 4
     t.text     "description",         limit: 65535
     t.datetime "created_at",                        null: false
@@ -72,24 +101,63 @@ ActiveRecord::Schema.define(version: 20150731185316) do
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
+    t.integer  "unit_id",             limit: 4
+    t.integer  "location_id",         limit: 4
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "hall",        limit: 255
+    t.string   "city",        limit: 255
+    t.text     "adress",      limit: 65535
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "unit",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "surname",    limit: 255
-    t.string   "proffesion", limit: 255
-    t.string   "email",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",            limit: 255
+    t.string   "surname",         limit: 255
+    t.string   "proffesion",      limit: 255
+    t.string   "email",           limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "password_digest", limit: 255
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  create_table "wydanies", force: :cascade do |t|
+    t.integer  "explo_id",    limit: 4
+    t.integer  "quantity",    limit: 4
+    t.integer  "user_id",     limit: 4
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "wzs", force: :cascade do |t|
-    t.string   "user_id",    limit: 255
-    t.string   "where",      limit: 255
-    t.string   "item_id",    limit: 255
-    t.integer  "quantity",   limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "user_id",       limit: 255
+    t.string   "item_id",       limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "location_id",   limit: 4
+    t.integer  "admin_user_id", limit: 4
+    t.integer  "status_id",     limit: 4
   end
 
 end

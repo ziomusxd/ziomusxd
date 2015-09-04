@@ -20,9 +20,6 @@
     <tr class="active">
       <th>Nazwa</th>
       <th>SN</th>
-      <th>Sala</th>
-      <th>Zawód</th>
-      <th>Miasto</th>
       <th>Ilość</th>
       <th>Uwagi</th>
       <th>Kategoria</th>
@@ -34,9 +31,6 @@
       <tr>
         <td><%= item.name.truncate(30) %></td>
         <td><%= item.sn.truncate(20) %></td>
-        <td><%= item.hall %></td>
-        <td><%= item.proffesion %></td>
-        <td><%= item.city %></td>
         <td><%= item.quantity %></td>
         <td><%= item.description.truncate(10) %></td>
         <td><%= item.category.name %></td>
@@ -45,6 +39,6 @@
     <% end %>
   </tbody>
 </table>
-  <%= link_to image_tag("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/96/button-round-fast-backward-icon.png",:width=>50,:height=>50, :border=>0), categories_path %> 
+  <%= link_to image_tag("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/96/button-round-fast-backward-icon.png",:width=>50,:height=>50, :border=>0), items_path %> 
 <%= will_paginate @items %>
 </div>

@@ -1,0 +1,2 @@
+module ExplosHelper
+end
