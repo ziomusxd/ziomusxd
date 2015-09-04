@@ -13,7 +13,7 @@ ActiveAdmin.register User do
 #   permitted
 # end
 
-permit_params :name, :surname, :proffesion, :email
+permit_params :name, :surname, :proffesion, :email, :admin
 #active_admin_importable
   controller do
 

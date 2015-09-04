@@ -1,15 +1,23 @@
 class ExplosController < ApplicationController
   helper_method :sort_column, :sort_direction
   
+  #<% if current_user.admin? %>
+  
+  
+  
   def index
+    if current_user.admin?
     #@explos = Explo.all
     #@explos = Explo.search(params[:search])
-    @explos = Explo.all.order('created_at DESC')
-     if params[:search]
-       @explos = Explo.search(params[:search]).order("created_at DESC")
+      @explos = Explo.all.order('created_at DESC')
+       if params[:search]
+         @explos = Explo.search(params[:search]).order("created_at DESC")
+       else
+         @explos = Explo.all.order('created_at DESC')
+       end
      else
-       @explos = Explo.all.order('created_at DESC')
-     end
+      redirect_to root_path
+    end
   end
 
   def show
