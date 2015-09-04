@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :items
   resources :categories
-    
+  resources :explos
+  resources :users
   
   
   root'home#index'
