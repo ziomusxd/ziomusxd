@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h2>Opis awarii</h2>
+</div>
+<dl class="dl-horizontal">
+  <dt><strong>Zgłaszający</strong></dt>
+  <dd><%= @accident.user.name + " " + @accident.user.surname %></dd>
+  <dt><strong>Naprawiający</strong></dt>
+  <dd><%= @accident.repman_id %></dd>
+  <dt><strong>Status</strong></dt>
+  <dd><%= @accident.status.name %></dd>
+  <dt><strong>Tryb</strong></dt>
+  <dd><%= @accident.mode %></dd>
+  <dt><strong>Lokalizacja</strong></dt>
+  <dd><%= @accident.location.name %></dd>
+  <dt><strong>Data zgłoszenia</strong></dt>
+  <dd><%= @accident.created_at.strftime("%d %b. %Y") %></dd>
+  <dt><strong>Data aktualizacji</strong></dt>
+  <dd><%= @accident.updated_at.strftime("%d %b. %Y") %></dd>
+  <dt><strong>Opis</strong></dt>
+  <dd><%= @accident.desctiption %></dd>
+
+</dl>
+
+        
+		
+  	  

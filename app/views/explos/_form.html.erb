@@ -1,0 +1,39 @@
+<% provide(:title, 'Nowa esploatacja') %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@explo) do |f| %>
+
+      <%#= f.label "Kategoria" %><br>
+	  <%#= f.collection_select :category_id, Category.all, :id, :name, prompt: true %><br>
+	  
+      <%= f.label "Kategoria" %><br>
+	  <%= f.collection_select :subcategory_id, Subcategory.all, :id, :name, prompt: true %><br>
+	  
+      <%= f.label "Podkategoria" %><br>
+	  <%= f.collection_select :subsubcategory, Subsubcategory.all, :id, :name, prompt: true %><br>
+	  
+      <%= f.label "Nazwa" %>
+      <%= f.text_field :name, class: 'form-control' %>
+	  
+      <%= f.label "Ilość" %>
+      <%= f.number_field :quantity, class: 'form-control' %>
+	  
+      <%= f.label "Jednostka" %><br>
+	  <%= f.collection_select :unit_id, Unit.all, :id, :name, prompt: true %><br>
+	  
+      <%= f.label "SN" %>
+      <%= f.text_field :sn, class: 'form-control' %>
+	  
+      <%= f.label "Regał" %>
+      <%= f.text_field :regal, class: 'form-control' %>
+	  
+      <%= f.label "Półka" %>
+      <%= f.text_field :polka, class: 'form-control' %>
+	  
+      <%= f.label "Uwagi" %>
+      <%= f.text_area :description, class: 'form-control' %><br>
+
+      <%= f.submit "Dodaj/Zmień", class: "btn btn-primary" %><br>
+    <% end %>
+  </div>
+</div>

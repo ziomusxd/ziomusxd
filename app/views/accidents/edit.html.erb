@@ -1,0 +1,15 @@
+<% provide(:title, "New accident") %>
+<h2>Aktualizacja awarii</h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@accident) do |f| %>
+	  
+      <%= f.label "Status" %>
+	  <%= f.collection_select :status_id, Status.all, :id, :name, prompt: true %><br>
+	  
+      <%= f.submit "Aktualizuj", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

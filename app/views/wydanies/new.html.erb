@@ -1,0 +1,20 @@
+<% provide(:title, 'Wydanie') %>
+<h2>Zamówienie</h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@wydanie) do |f| %>
+   	  
+	  <%= f.label "Explo" %>
+      <%= f.text_field :explo_id, class: 'form-control' %>
+	  
+      <%= f.label "Ilość" %>
+      <%= f.text_field :quantity, class: 'form-control' %>
+	  
+      <%= f.label "Uwagi" %>
+      <%= f.text_field :description, class: 'form-control' %><br>
+
+      <%= f.submit "Zamów", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

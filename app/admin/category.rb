@@ -43,6 +43,7 @@ form :html => { :enctype => "multipart/form-data" } do |f|
   inputs 'Dane' do 
     input :name, label: "Nazwa"
     input :description, label: "Opis"
+    input :subcategory_id
     input :avatar, :required => false, :as => :file
     actions
   end
@@ -54,7 +55,7 @@ end
   permit_params :name, :description, :avatar, :avatar_file_name,
                   :avatar_content_type,
                   :avatar_file_size,
-                  :avatar_updated_at
+                  :avatar_updated_at, :subcategory_id
 #active_admin_importable
   controller do
 

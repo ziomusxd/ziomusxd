@@ -1,0 +1,23 @@
+
+<div class="page-header">
+  <h1>Zakup</h1>
+</div>
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @tobuy.name %>
+</p>
+
+<p>
+  <strong>Desctiption:</strong>
+  <%= @tobuy.desctiption %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @tobuy.quantity %>
+</p>
+
+<%= link_to 'Edit', edit_tobuy_path(@tobuy) %> |
+<%= link_to 'Back', tobuys_path %>

@@ -17,37 +17,109 @@
         <nav>
           <ul class="nav navbar-nav navbar-right">
 
-			
-			
 	        <% if logged_in? %>
-			<% if current_user.admin?%>
-				<li><%= link_to "Eksploatacja", explos_path %></li>
-				<li><%= link_to "Przedmioty", items_path %></li>
+			  <% if current_user.admin?%>
+  	            <li class="dropdown">
+  	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Zakupy <b class="caret"></b></a>
+  	            <ul class="dropdown-menu">
+  	              <li><%= link_to "Wszystkie nowe", tobuys_path %></li>
+  	              <li><%= link_to "Dodaj nowy", new_tobuy_path %></li>
+  	            </ul>
+  	          </li>
+  	            <li class="dropdown">
+  	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Awarie <b class="caret"></b></a>
+  	            <ul class="dropdown-menu">
+  	              <li><%= link_to "Spis awarii", accidents_path %></li>
+  	              <li><%= link_to "Zgłoś awarie", new_accident_path %></li>
+  	            </ul>
+  	          </li>
+  	            <li class="dropdown">
+  	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Eksploatacja <b class="caret"></b></a>
+  	            <ul class="dropdown-menu">
+  	              <li><%= link_to "Spis eksploatacji", explos_path %></li>
+  	              <li><%= link_to "Zgłoś zapotrzebowanie", categories_path %></li>
+				  <li><%= link_to "Exploatacja do akceptacji", wydanies_path %></li>
+				  <li><%= link_to "Nowa eksploatacja", new_explo_path %></li>
+  	            </ul>
+  	          </li>
+
+			    <li><%= link_to "Przedmioty", items_path %></li>
+
+			    <li class="dropdown">
+   	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+   	              Konto <b class="caret"></b>
+   	            </a>
+   	            <ul class="dropdown-menu">
+   	              <li><%= link_to "Profil", current_user %></li>
+   	              <li><%= link_to "Ustawienia", edit_user_path(current_user) %></li>
+   	              <li class="divider"></li>
+   	              <li>
+   	                <%= link_to "Wyloguj", logout_path, method: "delete" %>
+   	              </li>
+   	            </ul>
+   	          </li>
+			  <% else %>
+			  
+			    <% if current_user.office?%>
+				
+ 			    <li><%= link_to "Zgłoś awarie", new_accident_path %></li>
+				
+    	           
+    	            <li class="dropdown">
+    	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Eksploatacja <b class="caret"></b></a>
+    	            <ul class="dropdown-menu">
+    	              <li><%= link_to "Spis eksploatacji", explos_path %></li>
+    	              <li><%= link_to "Zgłoś zapotrzebowanie", categories_path %></li>
+  				      <li><%= link_to "Exploatacja do akceptacji", wydanies_path %></li>
+  				      <li><%= link_to "Nowa eksploatacja", new_explo_path %></li>
+    	            </ul>
+    	          </li>
+				  
+	  	            <li class="dropdown">
+	  	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Zakupy <b class="caret"></b></a>
+	  	            <ul class="dropdown-menu">
+	  	              <li><%= link_to "Wszystkie nowe", tobuys_path %></li>
+	  	              <li><%= link_to "Dodaj nowy", new_tobuy_path %></li>
+	  	            </ul>
+	  	          </li>
+				
+ 	            <li class="dropdown">
+ 	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+ 	              Konto <b class="caret"></b>
+ 	            </a>
+ 	            <ul class="dropdown-menu">
+ 	              <li><%= link_to "Profil", current_user %></li>
+ 	              <li><%= link_to "Ustawienia", edit_user_path(current_user) %></li>
+ 	              <li class="divider"></li>
+ 	              <li>
+ 	                <%= link_to "Wyloguj", logout_path, method: "delete" %>
+ 	              </li>
+ 	            </ul>
+ 	          </li>
+			  	<% else %>
+				
+	 			    <li><%= link_to "Zgłoś awarie", new_accident_path %></li>
+	 	            <li class="dropdown">
+	 	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	 	              Konto <b class="caret"></b>
+	 	            </a>
+	 	            <ul class="dropdown-menu">
+	 	              <li><%= link_to "Profil", current_user %></li>
+	 	              <li><%= link_to "Ustawienia", edit_user_path(current_user) %></li>
+	 	              <li class="divider"></li>
+	 	              <li>
+	 	                <%= link_to "Wyloguj", logout_path, method: "delete" %>
+	 	              </li>
+	 	            </ul>
+
+	 	          </li>
+				<% end %>
 			  <% end %>
-			<li><%= link_to "Home",   root_path %></li>
-
-	          <li class="dropdown">
-	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	              Konto <b class="caret"></b>
-	            </a>
-	            <ul class="dropdown-menu">
-	              <li><%= link_to "Profil", current_user %></li>
-	              <li><%= link_to "Ustawienia", edit_user_path(current_user) %></li>
-	              <li class="divider"></li>
-	              <li>
-	                <%= link_to "Wyloguj", logout_path, method: "delete" %>
-	              </li>
-	            </ul>
-
-	          </li>
-	        <% else %>
+			<% else %>
 	              <li><%= link_to "Logowanie", login_path %></li>
 	              <li><%= link_to "Rejestracja", new_user_path %></li>			  
 	        <% end %>
-			
-			
-			
-			
+						
           </ul>
         </nav>
       </div>

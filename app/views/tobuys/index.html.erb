@@ -1,0 +1,38 @@
+
+<div class="page-header">
+  <h2>Spis zakupów</h2>
+</div>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr class="active">
+	  <th>ID</th>
+	  <th>Dodał</th>
+      <th>Nazwa</th>
+      <th>Opis</th>
+      <th>Ilość</th>
+	  <th>Data dodania</th>
+	  <th>Data aktualizacji</th>
+      <th colspan="0"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tobuys.each do |tobuy| %>
+      <tr>
+		<td><%= tobuy.id %></td>
+		<td><%= tobuy.user.name + " " + tobuy.user.surname %></td>
+        <td><%= tobuy.name.truncate(20) %></td>
+        <td><%= tobuy.desctiption.truncate(30) %></td>
+        <td><%= tobuy.quantity %></td>
+		<td><%= tobuy.created_at.strftime("%d %b. %Y") %></td>
+		<td><%= tobuy.created_at.strftime("%d %b. %Y") %></td>
+        <td><center><%= link_to 'Pokaż', tobuy %> | <%= link_to 'Edytuj', edit_tobuy_path(tobuy) %> | <%= link_to 'Usuń', tobuy, method: :delete, data: { confirm: 'Jesteś pewien?' } %></center></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<br>
+
+<%= link_to 'Nowy', new_tobuy_path %>

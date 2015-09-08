@@ -13,7 +13,7 @@ ActiveAdmin.register Explo do
 #   permitted
 # end
 
-permit_params :name, :sn, :regal, :polka, :quantity, :description, :unit_id, :adoption_id
+permit_params :name, :sn, :regal, :polka, :quantity, :description, :unit_id, :adoption_id, :category_id, :subcategory_id, :subsubcategory_id
 
 controller do
 

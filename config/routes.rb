@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tobuys
   get 'sessions/new'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -8,6 +9,10 @@ Rails.application.routes.draw do
   resources :explos
   resources :users
   resources :adoptions 
+  resources :accidents
+  resources :wydanies
+  resources :subcategories
+  resources :subsubcategories
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'

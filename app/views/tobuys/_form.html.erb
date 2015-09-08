@@ -1,0 +1,22 @@
+
+<% provide(:title, 'Wydanie') %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@tobuy) do |f| %>
+
+      <%= f.label "Nazwa" %>
+      <%= f.text_field :name, class: 'form-control' %>
+	  
+      <%= f.label "Ilość" %>
+      <%= f.number_field :quantity, class: 'form-control' %>
+	  
+      <%= f.label "Uwagi" %>
+      <%= f.text_area :desctiption, class: 'form-control' %><br>
+
+      <%= f.submit "Dodaj/Zmień", class: "btn btn-primary" %><br>
+    <% end %>
+  </div>
+</div>
+
+
+

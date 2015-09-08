@@ -1,0 +1,25 @@
+<% provide(:title, 'Wydanie') %>
+<h2>Akceptacja zamówienia</h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+	  
+	  <dt><strong>Pobiera</strong></dt>
+	  <dd><%= @wydanie.user.name + " " + @wydanie.user.surname %></dd>
+
+	  <dt><strong>Materiał</strong></dt>
+	  <dd><%= @wydanie.explo.name %></dd>
+	  
+	  
+    <%= form_for(@wydanie) do |f| %>
+
+      <%= f.label "Ilość" %>
+      <%= f.text_field :quantity, class: 'form-control' %>
+	  
+      <%= f.label "Uwagi" %>
+      <%= f.text_field :description, class: 'form-control' %><br>
+	  
+      <%= f.submit "Akceptuj", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

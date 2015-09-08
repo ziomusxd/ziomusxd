@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904162700) do
+ActiveRecord::Schema.define(version: 20150908131229) do
+
+  create_table "accidents", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "location_id", limit: 4
+    t.text     "desctiption", limit: 65535
+    t.integer  "status_id",   limit: 4
+    t.string   "mode",        limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "repman_id",   limit: 255
+  end
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -73,20 +84,24 @@ ActiveRecord::Schema.define(version: 20150904162700) do
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
+    t.integer  "subcategory_id",      limit: 4
   end
 
   create_table "explos", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "sn",          limit: 255
-    t.string   "regal",       limit: 255
-    t.string   "polka",       limit: 255
-    t.integer  "quantity",    limit: 4
-    t.string   "description", limit: 255
-    t.string   "unit_id",     limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "adoption_id", limit: 4
-    t.integer  "explo_id",    limit: 4
+    t.string   "name",              limit: 255
+    t.string   "sn",                limit: 255
+    t.string   "regal",             limit: 255
+    t.string   "polka",             limit: 255
+    t.integer  "quantity",          limit: 4
+    t.string   "description",       limit: 255
+    t.string   "unit_id",           limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "adoption_id",       limit: 4
+    t.integer  "explo_id",          limit: 4
+    t.integer  "subcategory_id",    limit: 4
+    t.integer  "category_id",       limit: 4
+    t.integer  "subsubcategory_id", limit: 4
   end
 
   create_table "items", force: :cascade do |t|
@@ -115,11 +130,45 @@ ActiveRecord::Schema.define(version: 20150904162700) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "statuses", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "subcategories", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.text     "desctiption",       limit: 65535
+    t.integer  "subsubcategory_id", limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "category_id",       limit: 4
+  end
+
+  create_table "subsubcategories", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.text     "desctiption",    limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "subcategory_id", limit: 4
+  end
+
+  create_table "tobuys", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "desctiption", limit: 65535
+    t.integer  "quantity",    limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "user_id",     limit: 4
   end
 
   create_table "units", force: :cascade do |t|
@@ -139,6 +188,7 @@ ActiveRecord::Schema.define(version: 20150904162700) do
     t.string   "password_digest", limit: 255
     t.string   "remember_digest", limit: 255
     t.boolean  "admin"
+    t.boolean  "office"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -150,6 +200,9 @@ ActiveRecord::Schema.define(version: 20150904162700) do
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.boolean  "accept"
+    t.integer  "accept_id",   limit: 4
+    t.string   "accept_user", limit: 255
   end
 
   create_table "wzs", force: :cascade do |t|
