@@ -1,8 +1,8 @@
+
 <html>
   <head>
-	    <title>Zadowowcy</title>
-    <%= stylesheet_link_tag 'application', media: 'all',
-                                           'data-turbolinks-track' => true %>
+	    <title>Zawodowcy!</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <!--[if lt IE 9]>
@@ -19,10 +19,22 @@
 
 	        <% if logged_in? %>
 			  <% if current_user.admin?%>
+	            
+				<li><%= link_to "Live!", lives_path %></li>
+  	            <li class="dropdown">
+  	              <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Administracja <b class="caret"></b></a>
+  	              <ul class="dropdown-menu">
+  	                <li><%= link_to "Użytkownicy", users_path %></li>
+  	                <li><%= link_to "Kategorie", categories_path %></li>
+					<li><%= link_to "Statusy", statuses_path %></li>
+					<li><%= link_to "Lokalizacje", locations_path %></li>
+					<li><%= link_to "Jednostki", units_path %></li>
+  	              </ul>
+  	            </li>
   	            <li class="dropdown">
   	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Zakupy <b class="caret"></b></a>
   	            <ul class="dropdown-menu">
-  	              <li><%= link_to "Wszystkie nowe", tobuys_path %></li>
+  	              <li><%= link_to "Lista", tobuys_path %></li>
   	              <li><%= link_to "Dodaj nowy", new_tobuy_path %></li>
   	            </ul>
   	          </li>
@@ -31,6 +43,7 @@
   	            <ul class="dropdown-menu">
   	              <li><%= link_to "Spis awarii", accidents_path %></li>
   	              <li><%= link_to "Zgłoś awarie", new_accident_path %></li>
+				  <li><%= link_to "Zrobione", ac_path %></li>
   	            </ul>
   	          </li>
   	            <li class="dropdown">
@@ -38,13 +51,30 @@
   	            <ul class="dropdown-menu">
   	              <li><%= link_to "Spis eksploatacji", explos_path %></li>
   	              <li><%= link_to "Zgłoś zapotrzebowanie", categories_path %></li>
-				  <li><%= link_to "Exploatacja do akceptacji", wydanies_path %></li>
+				  <li class="divider"></li>
+				  <li><%= link_to "Do akceptacji", wydanies_path %></li>
+				  <li><%= link_to "Do wydania", acc_path %></li>
+				  <li><%= link_to "Wydane i odrzucone", all_path %></li>
+				  <li class="divider"></li>
 				  <li><%= link_to "Nowa eksploatacja", new_explo_path %></li>
+				  <li><%= link_to "Przyjęcie eksploatacji", new_adoption_path %></li>
+				  <li><%= link_to "Spis przyjęć", adoptions_path %></li>
   	            </ul>
   	          </li>
-
-			    <li><%= link_to "Przedmioty", items_path %></li>
-
+			  
+			  
+  	          <li class="dropdown">
+  	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Przedmioty <b class="caret"></b></a>
+  	            <ul class="dropdown-menu">
+			    <li><%= link_to "Spis", items_path %></li>
+				<li><%= link_to "Dodaj nowy", new_item_path %></li>
+				<li class="divider"></li>
+				<li><%= link_to "Spis manewru sprzętu", wzs_path %></li>
+				<li><%= link_to "Nowy manewr", new_wz_path %></li>
+  	            </ul>
+  	          </li>
+			  
+			  
 			    <li class="dropdown">
    	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
    	              Konto <b class="caret"></b>
@@ -97,7 +127,8 @@
  	            </ul>
  	          </li>
 			  	<% else %>
-				
+				    <li><%= link_to "Users", users_path %></li>
+					<li><%= link_to "Zgłoś zapotrzebowanie", categories_path %></li>
 	 			    <li><%= link_to "Zgłoś awarie", new_accident_path %></li>
 	 	            <li class="dropdown">
 	 	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -133,7 +164,7 @@
 		
       <%= yield %>
 	  
-	  <%= debug(params) if Rails.env.development? %>
+	  <%#= debug(params) if Rails.env.development? %>
     </div>
   </body>
 </html>

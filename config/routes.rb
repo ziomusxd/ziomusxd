@@ -13,10 +13,18 @@ Rails.application.routes.draw do
   resources :wydanies
   resources :subcategories
   resources :subsubcategories
+  resources :statuses
+  resources :locations
+  resources :units
+  resources :wzs
+  resources :lives
+  resources :actions
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-
+  get 'acc' => 'wydanies#accepted'
+  get 'ac' => 'accidents#ac'
+  get 'all' => 'wydanies#all'
   
   
   root'home#index'

@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
     @categories = Category.all
     @subcategories = Subcategory.all
     @subsubcategories = Subsubcategory.all 
+    @explos = Explo.all
     # @category_id = Category.find_by(name: params[:category])
   #   @gigs = Gig.where(category_id: @category_id).order("created_at DESC")
   #   @subcategory_id = Subcategory.find_by(name: params[:subcategory])
@@ -15,6 +16,26 @@ class CategoriesController < ApplicationController
     @category = Category.find(params["id"])
   end
   
+  def new
+    @category = Category.new
+  end
+  
+  
+  def create
+    @category = Category.new(category_params)
+    if @category.save
+        #@explo.subsubcategory.subcategory
+        flash[:success] = "Kategoria dodana!"
+        redirect_to categories_path
+        #  redirect_to :action => :index
+        #flash[:success] = "Materiał eksploatacyjny dodany!"
+        #render 'new'
+      # Handle a successful save.
+    else
+      render 'new'
+    end
+  end
+  
 
 
   private
@@ -23,11 +44,10 @@ class CategoriesController < ApplicationController
     username == "admin" && password == "admin"
     end
   end
-  private
-
-    def category_params
-      params.require(:category).permit(:name, :desctiption)
-    end
+  
+  def category_params
+    params.require(:category).permit(:name, :desctiption)
+  end
     
 
 

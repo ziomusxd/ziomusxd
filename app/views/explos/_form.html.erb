@@ -10,13 +10,13 @@
 	  <%= f.collection_select :subcategory_id, Subcategory.all, :id, :name, prompt: true %><br>
 	  
       <%= f.label "Podkategoria" %><br>
-	  <%= f.collection_select :subsubcategory, Subsubcategory.all, :id, :name, prompt: true %><br>
+	  <%= f.collection_select :subsubcategory_id, Subsubcategory.all, :id, :name, prompt: true %><br>
 	  
       <%= f.label "Nazwa" %>
       <%= f.text_field :name, class: 'form-control' %>
 	  
-      <%= f.label "Ilość" %>
-      <%= f.number_field :quantity, class: 'form-control' %>
+      <%= f.label "Ilość dodać przez przyjęcie towaru na magazyn" %><br>
+      <%#= f.number_field :quantity, class: 'form-control' %>
 	  
       <%= f.label "Jednostka" %><br>
 	  <%= f.collection_select :unit_id, Unit.all, :id, :name, prompt: true %><br>

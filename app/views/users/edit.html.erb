@@ -1,25 +1,45 @@
 <% provide(:title, "Edit user") %>
-<h2>Update your profile</h2>
+<h2>Aktualizacja profilu</h2>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages' %>
+	  
+	  <%= f.label "Avatar"  %>
+	  <% if @user.avatar? %>
+	  <%= image_tag(@user.avatar.url(:thumb)) %>
+	  <% end %>
+	  <%= f.file_field :avatar %>
 
-      <%= f.label :name %>
+      <%= f.label "Imię" %>
       <%= f.text_field :name, class: 'form-control' %>
 	  
-      <%= f.label :surname %>
+      <%= f.label "Nazwisko" %>
       <%= f.text_field :surname, class: 'form-control' %>
+	  
+      <%= f.label "Opis" %>
+      <%= f.text_field :proffesion, class: 'form-control' %>
 
-      <%= f.label :email %>
+      <%= f.label "Email" %>
       <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.label :password %>
+      <%= f.label "Hasło" %>
       <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %><br>
+      <%= f.label :password_confirmation, "Potwierdzenie hasła" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+	  
+	  <% if current_user.admin? %>
+	  
+	  <%= f.label :admin %>
+	  <%= f.check_box :admin %>
+	  
+	  <%= f.label :office %>
+	  <%= f.check_box :office %>
+	  <br>
+	  
+	  <% end %>
 
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>

@@ -22,6 +22,12 @@ class AccidentsController < ApplicationController
   
   def show
     @accident = Accident.find(params[:id])
+    @action = Action.new
+    @actions = Action.all
+  end
+  
+  def ac
+    @accidents = Accident.all
   end
   
   def index
@@ -47,8 +53,7 @@ class AccidentsController < ApplicationController
   private
 
     def accident_params
-      params.require(:accident).permit(:user_id, :location_id, :desctiption, :status_id,
-                                   :mode)
+      params.require(:accident).permit(:user_id, :location_id, :desctiption, :status_id, :mode)
     end
   
   

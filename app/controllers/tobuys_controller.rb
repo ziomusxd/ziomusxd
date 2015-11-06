@@ -16,14 +16,23 @@ class TobuysController < InheritedResources::Base
   def create
     @tobuy = Tobuy.new(tobuy_params)
     @tobuy.user_id = current_user.id
-    if @tobuy.save
+    if @tobuy.quantity == 0 
+      if @tobuy.save
+        redirect_to (:back)
+        flash[:success] = "Materiał dodany do listy zakupów!"
+      else
+        render 'new'
+      end
+    else
+      if @tobuy.save
         # #  redirect_to :action => :index
         # flash[:success] = "Welcome to the Sample App!"
         redirect_to @tobuy
       # Handle a successful save.
-    else
-      render 'new'
-    end
+      else
+        render 'new'
+      end
+    end 
   end
   
   private

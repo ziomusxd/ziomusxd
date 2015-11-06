@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+categories = Category.create([{ name: 'Biuro'}])
+
+statuses = Status.create([{ name: 'Oczekuje'}, {name: 'Zrobione'}])
+
+users = User.create([{ name: 'Patryk', surname: 'Kątek', email: 'patryk.katek@put.poznan.pl', password: 'Robak1990', admin: '1'}])

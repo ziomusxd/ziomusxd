@@ -1,5 +1,3 @@
-<% if current_user.admin?%>
-
 <%- model_class = Wydanie -%>
 <div class="page-header">
   <h2>Zapotrzebowanie eksploatacji</h2>
@@ -20,24 +18,9 @@
     </tr>
   </thead>
   <tbody>
+  <% if current_user.admin? %>
   <% @wydanies.each do |a| %>
-    <% if a.accept %>
-	<tr class="success">
-	  <td><%= a.id %></td>
-	  <td><%= a.user.name + " " + a.user.surname %></td>
-	  <td><%= a.accept_user %></td>
-	  <td><%= a.explo.name %></td>
-	  <td><%= a.quantity %></td>
-	  <td>Wydane</td>	
-	  <td><%= a.created_at.strftime("%d %b. %Y") %></td>
-      <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
-	  <% if a.accept %>
-	    <td><%= link_to "Więcej", wydany_path(a) %> </td>
-	  <% else %>	
-		<td><%= link_to "Więcej", wydany_path(a) %>	<%= link_to "Wydaj", edit_wydany_path(a) %></td>
-	  <% end %>
-    </tr>
-  <% else %>
+    <% if a.accept_id == 1 %>
 	  <tr class="warning">
 	    <td><%= a.id %></td>
 	    <td><%= a.user.name + " " + a.user.surname %></td>
@@ -47,20 +30,30 @@
 	    <td>Oczekuje</td>	
 	    <td><%= a.created_at.strftime("%d %b. %Y") %></td>
 	    <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
-		<% if a.accept %>
-	    <td><%= link_to "Więcej", wydany_path(a) %> </td>
-		<% else %>	
-		<td><%= link_to "Więcej", wydany_path(a) %>	<%= link_to "Wydaj", edit_wydany_path(a) %></td>
-		<% end %>
-		
-		
+		<td><%= link_to "Więcej", wydany_path(a) %>	<%= link_to "Edytuj", edit_wydany_path(a) %></td>	
 	  </tr> 
-	<% end %>
+    <% end %>	
   <% end %>
   </tbody>
 </table>
-
-
-<% else %>
-  redirect_to root_path
-<% end %>
+ <% else %>
+   <% @wydanies.each do |a| %>
+     <% if a.accept_id == 1 %>
+	 <% if a.explo.category_id == 1 %>
+ 	  <tr class="warning">
+ 	    <td><%= a.id %></td>
+ 	    <td><%= a.user.name + " " + a.user.surname %></td>
+ 	    <td><%= a.accept_user %></td>
+ 	    <td><%= a.explo.name %></td>
+ 	    <td><%= a.quantity %></td>
+ 	    <td>Oczekuje</td>	
+ 	    <td><%= a.created_at.strftime("%d %b. %Y") %></td>
+ 	    <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
+ 		<td><%= link_to "Więcej", wydany_path(a) %>	<%= link_to "Edytuj", edit_wydany_path(a) %></td>	
+ 	  </tr> 
+	  <% end %>
+     <% end %>	
+   <% end %>
+   </tbody>
+ </table>
+ <% end %>

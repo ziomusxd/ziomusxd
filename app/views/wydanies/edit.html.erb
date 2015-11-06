@@ -13,6 +13,9 @@
 	  
     <%= form_for(@wydanie) do |f| %>
 
+	  <%= f.label "Status"%>
+	  <%= f.select :accept_id, [ ['Akceptuj', 2], ['Odrzuć', 3], ['Wydaj', 4] ], :prompt => 'Select One' %><br>
+	  
       <%= f.label "Ilość" %>
       <%= f.text_field :quantity, class: 'form-control' %>
 	  

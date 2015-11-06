@@ -3,10 +3,9 @@ class Item < ActiveRecord::Base
   belongs_to :unit
   belongs_to :location
   has_many :wzs
-  validates :category_id, :unit_id, :location_id, :name, :quantity, :sn, presence: true
-  has_attached_file :avatar, :styles => { :medium =>     "300x300#", :thumb => "200x200#" }
-  validates_attachment :avatar, content_type: { content_type:     ["image/jpg", "image/jpeg", "image/png"] }
-
+  validates :unit_id, :location_id, :name, :quantity, :sn, presence: true
+  has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 
 

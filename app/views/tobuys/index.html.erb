@@ -2,6 +2,9 @@
 <div class="page-header">
   <h2>Spis zakupów</h2>
 </div>
+
+<td><%= link_to 'Nowy', new_tobuy_path %></td>
+
 <table class="table table-striped table-hover">
   <thead>
     <tr class="active">
@@ -31,8 +34,3 @@
     <% end %>
   </tbody>
 </table>
-
-
-<br>
-
-<%= link_to 'Nowy', new_tobuy_path %>

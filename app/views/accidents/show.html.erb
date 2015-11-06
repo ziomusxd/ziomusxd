@@ -1,6 +1,11 @@
 <div class="page-header">
   <h2>Opis awarii</h2>
 </div>
+<dt><%= link_to 'Back', :back %></dt><dd></dd>
+
+    <div class="row">
+      <div class="col-xs-3 col-sm-6">
+		  
 <dl class="dl-horizontal">
   <dt><strong>Zgłaszający</strong></dt>
   <dd><%= @accident.user.name + " " + @accident.user.surname %></dd>
@@ -20,6 +25,60 @@
   <dd><%= @accident.desctiption %></dd>
 
 </dl>
+</div>
+      <div class="col-xs-9 col-sm-6">
+		  <% if current_user.admin? %>
+		  <b><i>Wpis działań</b></i>
+	      <%= form_for(@action, as: :foo) do |f| %>
+	
+	  	 	<%= f.hidden_field :accident_id, :value => @accident.id %>
+	  	    <%= f.hidden_field :user_id, :value => current_user.id %>
+		    
+	        <%= f.label "Status" %>
+	        <%= f.collection_select :status_id, Status.all, :id, :name, {:selected => "#{@accident.status_id}"}, prompt: true %><br>
+	  
+	        <%= f.label "Uwagi" %>
+	        <%= f.text_area :description, class: 'form-control' %><br>
+
+	        <%= f.submit "Wpisz", class: "btn btn-primary" %>
+	  
+	      <% end %>
+		  
+		  <% end %>
+</div>
+</div>
+
+    <div class="row">
+		<b>Historia awarii</b>
+  	  <table class="table table-striped table-hover">
+    	    <thead>
+      	  <tr class="active">
+        	    <th>Użytkownik</th>
+        	  	<th>Status</th>
+			  <th>Data</th>
+          	  <th>Uwagi</th>
+			  <th></th>
+      	  </tr>
+    		</thead>
+    	    <tbody>
+
+      	  <% @actions.each do |a| %>
+		  <% if a.accident_id == @accident.id %>
+        		<tr>
+          	  	  <td><%= a.user.name + " " + a.user.surname %></td>
+             	  <td><%= a.status.name %></td>
+				  <td><%= a.created_at %></td>
+            	  	<td><%= a.description.truncate(20) %></td>
+					<td><%= link_to "Więcej", action_path(a)%>
+
+       	 	</tr>
+      	  <% end %>
+		  <% end %>
+    		</tbody>
+  	  </table>
+	</div>
+
+
 
         
 		

@@ -1,0 +1,54 @@
+<% if current_user.admin?%>
+
+<%- model_class = Accident -%>
+<div class="page-header">
+  <h2>Spis awarii wykonanych</h2>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr class="active">
+	  <th>Numer</th>
+      <th>Zgłaszający</th>
+	  <th>Naprawiający</th>
+      <th>Lokalizacja</th>
+      <th>Status</th>
+	  <th>Tryb</th>
+	  <th>Opis</th>
+	  <th>Data zgłoszenia</th>
+	  <th>Data Aktualizacji</th>
+	  <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @accidents.each do |a| %>
+    <tr>
+			<% if a.status.name == "Zrobione" %>
+	  <td><%= a.id %></td>
+	  <td><%= a.user.name + " " + a.user.surname %></td>
+	  <td><%= a.repman_id %></td>
+	  <td><%= a.location.name %></td>
+	  <td><%= a.status.name %></td>
+	  <td><%= a.mode %></td>
+      <td><%= a.desctiption.truncate(15) %></td>	
+	  <td><%= a.created_at.strftime("%d %b. %Y") %></td>
+      <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
+	  <td><%= link_to "Więcej", accident_path(a) %></td>
+    </tr>
+	<% end %>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<% else %>
+  redirect_to root_path
+<% end %>

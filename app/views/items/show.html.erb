@@ -1,8 +1,10 @@
 
 <div class="page-header">
-  <h1>Item</h1>
+  <h1>Przedmiot</h1>
 </div>
 
+<div class="col-xs-5">
+	 <dt><%= link_to "Wróć", items_path %></dt><dd></dd>
 <dl class="dl-horizontal">
   <dt><strong>Nazwa</strong></dt>
   <dd><%= @item.name %></dd>
@@ -17,10 +19,48 @@
   <dt><strong>Uwagi</strong></dt>
   <dd><%= @item.description %></dd>
   <dt><strong>Kategoria</strong></dt>
-  <dd><%= @item.category.name %></dd>
-  <dt><strong>Zdjęcie</strong></dt>
-  <dd><%= image_tag @item.avatar %></dd>
- <%= link_to image_tag("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/96/button-round-fast-backward-icon.png",:width=>50,:height=>50, :border=>0), items_path %>
+  <dd><%#= @item.category.name %></dd>
+</div>
+<div class="col-xs-7">
+      <div class="row">
+		  <div class="col-xs-6"
+  <dt><%= link_to "Dodaj zdjęcie", edit_item_path(@item) %></dt>
+  <% if @item.avatar? %>
+  <dd><%= image_tag(@item.avatar.url(:medium)) %></dd>
+  <% end %>
+</div>
+<div class="col-xs-6">
+  	
+	<% if current_user.admin?%>
+     <dt><strong>Dodaj zmianę</strong></dt>
+    <%= form_for(@wz) do |f| %>
+
+      <%= f.hidden_field :admin_user_id, :value => current_user.name + " " + current_user.surname %>
+	  
+	  <%= f.hidden_field :item_id, :value => @item.id %><br>
+  
+  	  <%= f.label "Dla użytkownika" %>
+ 	  <%= f.collection_select :user_id, User.all, :id, :surname , {:selected => "#{current_user.id}"}, prompt: true %><br>
+	  
+      <%= f.label "Lokalizacja" %>
+	  <%= f.collection_select :location_id, Location.all, :id, :name, {:selected => "#{@item.location_id}"}, prompt: true %><br>
+	  
+      <%= f.label "Status" %>
+	  <%= f.collection_select :status_id, Status.all, :id, :name, prompt: true %><br>
+	  
+      <%= f.label "Uwagi" %>
+      <%= f.text_area :description, class: 'form-control' %><br>
+
+      <%= f.submit "Wprowadź zmianę", class: "btn btn-primary" %>
+  
+    <% end %>
+    <% end %>
+	
+	
+</div>
+</div>
+</div>
+<div class="col-xs-8 col-sm-12">
 
 <br>
   <strong>Historia</strong>
@@ -28,27 +68,27 @@
     <thead>
       <tr class="active">
 		<th>ID</th>
-        <th>Admin</th>
         <th>Petent</th>
 		<th>Lokalizacja</th>
 		<th>Status</th>
-		<th>Data wydania</th>
+		<th>Opis</th>
 		<th>Data aktualizacji</th>
+		<th></th>
       </tr>
     </thead>
    <tbody>
     <% @wzs.each do |wz| %>
       <tr>
 		<td><%= wz.id %></td>
-		<td><%= wz.admin_user.name + " " + wz.admin_user.surname %></td>
 		<td><%= wz.user.name %></td>
 		<td><%= wz.location.name %></td>
 		<td><%= wz.status.name %></td>
-		<td><%= wz.created_at.strftime("%d %b. %Y") %></td>
-		<td><%= wz.created_at.strftime("%d %b. %Y") %></td>
+		<td><%= wz.description %></td>
+		<td><%= wz.updated_at.strftime("%d %b. %Y") %></td>
+		<td><%= link_to "Więcej", wz_path(wz)%>
 	  </tr>
     <% end %>
   </tbody>
 </table>
 
-
+</div>

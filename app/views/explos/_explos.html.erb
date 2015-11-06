@@ -1,0 +1,29 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <tr class="active">
+      <th><%= sortable "name", "Nazwa" %></th>
+      <th>SN</th>
+      <th>Ilość</th>
+	  <th>Jednostka</th>
+	  <th><%= sortable "regal", "Regał"%></th>
+	  <th>Półka</th>
+      <th>Uwagi</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @explos.each do |explo| %>
+      <tr>
+        <td><%= explo.name.truncate(30) %></td>
+        <td><%= explo.sn.truncate(20) %></td>
+        <td><%= explo.quantity %></td>
+		<td><%= explo.unit.name %></td>
+		<td><%= explo.regal %></td>
+		<td><%= explo.polka %></td>
+        <td><%= explo.description.truncate(10) %></td>
+		<td style="width:80px"> <%= link_to image_tag("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/96/button-round-play-icon.png",:width=>30,:height=>30, :border=>0), explo_path(explo) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @explos%>

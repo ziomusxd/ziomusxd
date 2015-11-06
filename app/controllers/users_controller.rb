@@ -1,9 +1,15 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update] 
+  def index
+    @users = User.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+  end
+  
   def show
     @user = User.find(params[:id])
-    @accidents = @user.accident.order('created_at DESC')
+    @accidents = @user.accident.order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
+    @wydanies = @user.wydanie.order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
+
   end
 
   def new
@@ -13,9 +19,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      
         log_in @user
         #  redirect_to :action => :index
-        flash[:success] = "Welcome to the Sample App!"
+        flash[:success] = "Witaj!!"
         redirect_to @user
       # Handle a successful save.
     else
@@ -42,7 +49,7 @@ class UsersController < ApplicationController
     private
 
       def user_params
-        params.require(:user).permit(:name, :surname, :email, :password,
+        params.require(:user).permit(:name, :surname, :email,:avatar, :password, :admin, :office, :proffesion,
                                      :password_confirmation)
       end
       
@@ -58,6 +65,6 @@ class UsersController < ApplicationController
       # Confirms the correct user.
       def correct_user
         @user = User.find(params[:id])
-        redirect_to(root_url) unless current_user?(@user)
+        redirect_to(root_url) unless current_user?(@user) or current_user.admin?
       end
 end

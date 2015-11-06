@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908131229) do
+ActiveRecord::Schema.define(version: 20151106173543) do
 
   create_table "accidents", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20150908131229) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "repman_id",   limit: 255
+  end
+
+  create_table "actions", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.string   "description", limit: 255
+    t.integer  "accident_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "status_id",   limit: 4
   end
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -62,17 +71,17 @@ ActiveRecord::Schema.define(version: 20150908131229) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "adoptions", force: :cascade do |t|
-    t.integer  "admin_user_id", limit: 4
-    t.integer  "explo_id",      limit: 4
-    t.integer  "quantity",      limit: 4
-    t.string   "description",   limit: 255
-    t.string   "name",          limit: 255
-    t.string   "sn",            limit: 255
-    t.string   "regal",         limit: 255
-    t.string   "polka",         limit: 255
-    t.string   "unit_id",       limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "user_id",     limit: 4
+    t.integer  "explo_id",    limit: 4
+    t.integer  "quantity",    limit: 4
+    t.string   "description", limit: 255
+    t.string   "name",        limit: 255
+    t.string   "sn",          limit: 255
+    t.string   "regal",       limit: 255
+    t.string   "polka",       limit: 255
+    t.string   "unit_id",     limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -85,23 +94,28 @@ ActiveRecord::Schema.define(version: 20150908131229) do
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
     t.integer  "subcategory_id",      limit: 4
+    t.integer  "category_id",         limit: 4
   end
 
   create_table "explos", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "sn",                limit: 255
-    t.string   "regal",             limit: 255
-    t.string   "polka",             limit: 255
-    t.integer  "quantity",          limit: 4
-    t.string   "description",       limit: 255
-    t.string   "unit_id",           limit: 255
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "adoption_id",       limit: 4
-    t.integer  "explo_id",          limit: 4
-    t.integer  "subcategory_id",    limit: 4
-    t.integer  "category_id",       limit: 4
-    t.integer  "subsubcategory_id", limit: 4
+    t.string   "name",                limit: 255
+    t.string   "sn",                  limit: 255
+    t.string   "regal",               limit: 255
+    t.string   "polka",               limit: 255
+    t.integer  "quantity",            limit: 4
+    t.string   "description",         limit: 255
+    t.string   "unit_id",             limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "adoption_id",         limit: 4
+    t.integer  "explo_id",            limit: 4
+    t.integer  "subcategory_id",      limit: 4
+    t.integer  "category_id",         limit: 4
+    t.integer  "subsubcategory_id",   limit: 4
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
+    t.datetime "avatar_updated_at"
   end
 
   create_table "items", force: :cascade do |t|
@@ -179,16 +193,20 @@ ActiveRecord::Schema.define(version: 20150908131229) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "surname",         limit: 255
-    t.string   "proffesion",      limit: 255
-    t.string   "email",           limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "password_digest", limit: 255
-    t.string   "remember_digest", limit: 255
+    t.string   "name",                limit: 255
+    t.string   "surname",             limit: 255
+    t.string   "proffesion",          limit: 255
+    t.string   "email",               limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "password_digest",     limit: 255
+    t.string   "remember_digest",     limit: 255
     t.boolean  "admin"
     t.boolean  "office"
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -200,7 +218,6 @@ ActiveRecord::Schema.define(version: 20150908131229) do
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.boolean  "accept"
     t.integer  "accept_id",   limit: 4
     t.string   "accept_user", limit: 255
   end
@@ -211,8 +228,9 @@ ActiveRecord::Schema.define(version: 20150908131229) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "location_id",   limit: 4
-    t.integer  "admin_user_id", limit: 4
+    t.string   "admin_user_id", limit: 255
     t.integer  "status_id",     limit: 4
+    t.string   "description",   limit: 255
   end
 
 end

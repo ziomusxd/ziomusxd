@@ -1,0 +1,49 @@
+<div class="page-header">
+  <h1>Wydanie eksploatacji #<%= @wydanie.id%></h1>
+</div>
+
+<div class="col-xs-6">
+	 <dt><%= link_to "Wróć", (:back) %></dt><dd></dd>
+<dl class="dl-horizontal">
+  <dt><strong>Zamawiający</strong></dt>
+  <dd><%= @wydanie.user.name + " " + @wydanie.user.surname %></dd>
+  <dt><strong>Wydający</strong></dt>
+  <dd><%= @wydanie.accept_user %></dd>
+  <dt><strong>Status</strong></dt>
+  
+  
+  <dd><% if @wydanie.accept_id == 1 %>
+       Oczekujący
+	 <% end %>
+     <% if @wydanie.accept_id == 2 %>
+      Zaakceptowane do wydania
+	 <% end %>
+    <% if @wydanie.accept_id == 3%>
+       Odrzucone
+     <% end %>
+     <% if @wydanie.accept_id == 4%>
+	  Wydane
+	  <% end %></dd>
+  
+  <dt><strong>Sn</strong></dt>
+  <dd><%= @wydanie.explo.sn %></dd>
+  <dt><strong>Ilość zamawiana</strong></dt>
+  <dd><%= @wydanie.quantity %> <%= @wydanie.explo.unit.unit %></dd>
+  <dt><strong>Ilość w magazynie</strong></dt>
+  <dd><%= @wydanie.explo.quantity %> <%= @wydanie.explo.unit.unit %></dd>
+  <dt><strong>Regał</strong></dt>
+  <dd><%= @wydanie.explo.regal %></dd>  
+  <dt><strong>Półka</strong></dt>
+  <dd><%= @wydanie.explo.polka %></dd>
+  <dt><strong>Data zgłoszenia</strong></dt>
+  <dd><%= @wydanie.created_at %></dd>
+  <dt><strong>Data aktualizacji</strong></dt>
+  <dd><%= @wydanie.updated_at %></dd>
+  <dt><strong>Uwagi</strong></dt>
+  <dd><%= @wydanie.description %></dd>
+  <% if current_user.admin? %>
+  <%= link_to "Aktualizuj", edit_wydany_path(@wydanie) %>
+  <% end %>
+</div>
+
+

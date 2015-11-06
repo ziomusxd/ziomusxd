@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h2><%= @subsubcategory.name %></h2>
+</div>
+  <%= link_to "Wróć do #{@subsubcategory.subcategory.name}", subcategory_path(@subsubcategory.subcategory_id) %>
+  <br>
+  <br>
+	  <table class="table table-striped table-hover">
+  	    <thead>
+    	  <tr class="active">
+      	    <th>Nazwa</th>
+      	  	<th>SN</th>
+	  	  	<% if current_user.admin?%> 
+      	  	  <th>Ilość</th>
+	  		  <th>Jednostka</th>
+	  		  <th>Regał</th>
+	  		  <th>Półka</th>
+        	  <th>Uwagi</th>
+	  		<% end %>
+      	    <th></th>
+    	  </tr>
+  		</thead>
+  	    <tbody>
+    	  <% @explos.each do |explo| %>
+      		<tr>
+        	  <td><%= explo.name.truncate(30) %></td>
+        	  <td><%= explo.sn.truncate(20) %></td>
+	    	  <% if current_user.admin?%> 
+           	    <td><%= explo.quantity %></td>
+		  	  	<td><%= explo.unit.unit %></td>
+		 	   	<td><%= explo.regal %></td>
+		  	  	<td><%= explo.polka %></td>
+          	  	<td><%= explo.description.truncate(20) %></td>
+			  <% end %>
+			  <td style="width:80px"> <%= link_to image_tag("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/96/button-round-play-icon.png",:width=>30,:height=>30, :border=>0), explo_path(explo) %></td>
+     	 	</tr>
+    	  <% end %>
+  		</tbody>
+	  </table>

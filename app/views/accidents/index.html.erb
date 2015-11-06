@@ -22,6 +22,22 @@
   </thead>
   <tbody>
   <% @accidents.each do |a| %>
+      <% if a.status.name == "Zrobione" %>
+      <% else %>
+	  <% if a.mode == "Pilne" %>
+	    <tr class="danger">
+	  <td><%= a.id %></td>
+	  <td><%= a.user.name + " " + a.user.surname %></td>
+	  <td><%= a.repman_id %></td>
+	  <td><%= a.location.name %></td>
+	  <td><%= a.status.name %></td>
+	  <td><%= a.mode %></td>
+      <td><%= a.desctiption.truncate(15) %></td>	
+	  <td><%= a.created_at.strftime("%d %b. %Y") %></td>
+      <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
+	  <td><%= link_to "Więcej", accident_path(a) %></td>
+    </tr>
+	<% else %>
     <tr>
 	  <td><%= a.id %></td>
 	  <td><%= a.user.name + " " + a.user.surname %></td>
@@ -32,9 +48,11 @@
       <td><%= a.desctiption.truncate(15) %></td>	
 	  <td><%= a.created_at.strftime("%d %b. %Y") %></td>
       <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
-	  <td><%= link_to "Więcej", accident_path(a) %> <%= link_to "Aktuaizuj", edit_accident_path(a) %></td>
+	  <td><%= link_to "Więcej", accident_path(a) %></td>
     </tr>
-    <% end %>
+	<% end %>
+	<% end %>
+	<% end %>
   </tbody>
 </table>
 
