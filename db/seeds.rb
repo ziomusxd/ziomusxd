@@ -11,4 +11,4 @@ categories = Category.create([{ name: 'Biuro'}])
 
 statuses = Status.create([{ name: 'Oczekuje'}, {name: 'Zrobione'}])
 
-users = User.create([{ name: 'Patryk', surname: 'Kątek', email: 'patryk.katek@put.poznan.pl', password: 'Robak1990', admin: '1'}])
+users = User.create([{ name: 'Patryk', surname: 'Kątek', email: 'patryk.katek@put.poznan.pl', password: 'polka11', admin: '1'}])
