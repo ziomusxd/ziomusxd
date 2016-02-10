@@ -21,7 +21,7 @@
 		<td><%= explo.regal %></td>
 		<td><%= explo.polka %></td>
         <td><%= explo.description.truncate(10) %></td>
-		<td style="width:80px"> <%= link_to image_tag("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/96/button-round-play-icon.png",:width=>30,:height=>30, :border=>0), explo_path(explo) %></td>
+		<td style="width:80px"> <%= link_to "Więcej", explo_path(explo) %></td>
       </tr>
     <% end %>
   </tbody>

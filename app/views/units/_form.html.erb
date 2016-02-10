@@ -1,18 +1,7 @@
-<% provide(:title, 'Nowa jednostka') %>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@unit) do |f| %>
-  
-      <%= f.label "Nazwa" %>
-      <%= f.text_field :name, class: 'form-control' %><br>
-	  
-      <%= f.label "Jednostka" %>
-      <%= f.text_field :unit, class: 'form-control' %><br>
-
-      <%= f.submit "Dodaj/Zmień", class: "btn btn-primary" %><br>
-    <% end %>
-  </div>
+<div class="col-md-6">
+    <%= form_for @unit, remote: true do |f|   %>
+    <%= f.text_field  :name     ,:placeholder => "Nazwa"                %>
+    <%= f.text_field  :unit     ,:placeholder => "Jednostka"                    %>
+    <%= f.button :Dodaj                           %>
+  <% end %>
 </div>
-
-
-

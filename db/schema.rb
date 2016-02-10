@@ -185,9 +185,9 @@ ActiveRecord::Schema.define(version: 20151106173543) do
     t.integer  "user_id",     limit: 4
   end
 
-  create_table "units", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "unit",       limit: 255
+  create_table "units", force: :true do |t|
+    t.string   "name",       null: false
+    t.string   "unit",       null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
