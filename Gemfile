@@ -28,9 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt'
 # Use Unicorn as the app server
 # gem 'unicorn'
-
-# Use Capistrano for deployment
- gem 'capistrano-rails', group: :development
+gem 'unicorn' 
 # paperclip
 gem "paperclip", "~> 4.3"
 
@@ -58,10 +56,13 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano3-unicorn'
+  
 end
 
 
 group :production do
   gem 'rails_12factor'
 end
-gem 'rvm-capistrano'
