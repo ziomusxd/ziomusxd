@@ -39,7 +39,8 @@ gem 'devise'
 gem 'bootstrap-sass'
 
 gem 'will_paginate'
-
+gem 'sass'
+gem 'rails-assets-bootstrap'
 group :assets do
 
    # See https://github.com/sstephenson/execjs#readme for more supported runtimes
