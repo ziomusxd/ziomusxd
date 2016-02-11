@@ -21,6 +21,7 @@ set :ssh_options, {
 set :rails_env, :production
 set :conditionally_migrate, true 
 
+set :linked_files, %w{config/database.yml config/secrets.yml}
 
 
 # server-based syntax
