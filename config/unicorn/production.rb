@@ -6,11 +6,14 @@ pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
 
-worker_processes Integer(ENV['WEB_CONCURRENCY'] || 1)
+worker_processes 2
 timeout 30
 preload_app true
 
-listen '/tmp/unicorn.spui.sock', backlog: 64
+listen '/tmp/unicorn.spui.sock', backlog: 2048
+
+# Should be 'production' by default, otherwise use other env
+rails_env = ENV['RAILS_ENV'] || 'production'
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
