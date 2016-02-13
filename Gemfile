@@ -42,7 +42,7 @@ gem 'bootstrap-sass'
 gem 'will_paginate'
 gem 'sass'
 #heroku
-#gem 'pg'
+gem 'pg'
 group :assets do
 
    # See https://github.com/sstephenson/execjs#readme for more supported runtimes
