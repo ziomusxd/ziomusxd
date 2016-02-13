@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.1'
 
 gem 'responders', '~> 2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -40,6 +41,8 @@ gem 'bootstrap-sass'
 
 gem 'will_paginate'
 gem 'sass'
+#heroku
+#gem 'pg'
 group :assets do
 
    # See https://github.com/sstephenson/execjs#readme for more supported runtimes
