@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h2>Użytkownicy</h2>
+</div>
+
+<% if current_user.admin? %>
+  <td> <%= link_to "Dodaj urzytkownika", new_user_path %></td>
+<% end %>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr class="active">
+      <th>Imię i Nazwisko</th>
+	  <th>E-mail</th>
+	  <th>Opis</th>
+	  <% if current_user.admin? %>	
+      <th>Admin</th>
+	  <th>Admin Biuro</th>
+      <% end %>
+      <th></th>
+	  
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |u| %>
+      <tr>
+        <td><%= u.name + " " + u.surname %></td>
+		<td><%= u.email %></td>
+		<td><%= u.proffesion %></td>
+		<% if current_user.admin? %>
+		<td><%= u.admin %></td>
+		<td><%= u.office %></td>
+		<% end %>
+		<% if current_user.admin? %>
+	  	  <td> <%= link_to "Edytuj", edit_user_path(u) %> | <%= link_to "Pokaż", user_path(u) %></td>
+		<% else %>
+		  <td> <%= link_to "Pokaż", user_path(u) %></td>
+		<% end %>
+		
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @users %>

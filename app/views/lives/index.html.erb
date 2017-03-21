@@ -1,0 +1,117 @@
+<% if current_user.admin?%>
+
+<%- model_class = Accident -%>
+<div class="col-xs-6">
+<div class="page-header">
+  <h2>Spis awarii</h2>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr class="active">
+      <th>Zgłaszający</th>
+      <th>Lokalizacja</th>
+	  <th>Tryb</th>
+	  <th>Opis</th>
+	  <th>Data</th>
+	  <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @accidents.each do |a| %>
+  <% if a.status.name == "Zrobione"%>
+  <% else %>
+  <% if a.mode == "Pilne" %>
+    <tr class="danger">
+		  <td><%= a.user.name + " " + a.user.surname %></td>
+		  <td><%= a.location.name %></td>
+		  <td><%= a.mode %></td>
+	      <td><%= a.desctiption.truncate(15) %></td>	
+		  <td><%= a.created_at.strftime("%d %b") %></td>	
+		  <td><%= link_to "Więcej", accident_path(a) %></td>
+	    </tr>
+	  <% else %>
+    <tr>
+		  <td><%= a.user.surname %></td>
+		  <td><%= a.location.name %></td>
+		  <td><%= a.mode %></td>
+	      <td><%= a.desctiption.truncate(15) %></td>	
+		  <td><%= a.created_at.strftime("%d %b") %></td>	
+		  <td><%= link_to "Więcej", accident_path(a) %></td>
+	    </tr>
+		<% end %>
+	  
+    <% end %>
+	<% end %>
+  </tbody>
+</table>
+
+<% else %>
+  redirect_to root_path
+<% end %>
+</div>
+
+<div class="col-xs-6">
+
+<div class="page-header">
+  <h2>Zapotrzebowanie sprzętu</h2>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr class="active">
+      <th>Zgłaszający</th>
+      <th>Towar</th>
+	  <th>Ilość</th>
+	  <th>Status</th>
+	  <th>Data</th>
+	  <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% if current_user.admin? %>
+  <% @wydanies.each do |a| %>
+    <% if a.accept_id == 1 %>
+	  <tr class="warning">
+	    <td><%= a.user.surname %></td>
+	    <td><%= a.explo.name %></td>
+	    <td><%= a.quantity %></td>
+	    <td>Oczekuje</td>	
+	    <td><%= a.created_at.strftime("%d %b") %></td>
+		<td><%= link_to "Więcej", wydany_path(a) %></td>	
+	  </tr> 
+    <% end %>	
+    <% if a.accept_id == 2 %>
+	  <tr class="active">
+	    <td><%= a.user.surname %></td>
+	    <td><%= a.explo.name %></td>
+	    <td><%= a.quantity %></td>
+		<td>Do wydania</td>
+	    <td><%= a.created_at.strftime("%d %b") %></td>
+		<td><%= link_to "Więcej", wydany_path(a) %></td>	
+	  </tr> 
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+ <% else %>
+   <% @wydanies.each do |a| %>
+     <% if a.accept_id == 1 %>
+	 <% if a.explo.category_id == 1 %>
+ 	  <tr class="warning">
+ 	    <td><%= a.user.surname %></td>
+ 	    <td><%= a.explo.name %></td>
+ 	    <td><%= a.quantity %></td>
+ 	    <td>Oczekuje</td>	
+ 	    <td><%= a.created_at.strftime("%d %b") %></td>
+ 		<td><%= link_to "Więcej", wydany_path(a) %></td>	
+ 	  </tr> 
+	  <% end %>
+     <% end %>	
+   <% end %>
+   </tbody>
+ </table>
+ <% end %>
+	
+	
+</div>

@@ -1,0 +1,12 @@
+<% @units.each do |u| %>
+  <tr>
+        <td><%= u.name %></td>
+		<td><%= u.unit %></td>
+
+		<td style="width:80px"> <%= link_to edit_unit_path(u), remote: true do %>
+    Edytuj
+  <% end %> <%= link_to u,  method: :delete,  data: { confirm: 'Are you sure?' }, remote: true, :class => 'delete_unit' do %>
+  Usuń
+<% end %></td>
+      </tr>
+	    <% end %>

@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h1>Zmiana statusu <%= @wz.item.sn %></h1>
+</div>
+
+<div class="col-xs-6">
+	 <dt><%= link_to "Wróć", (:back) %></dt><dd></dd>
+<dl class="dl-horizontal">
+  <dt><strong>Wykonał</strong></dt>
+  <dd><%= @wz.admin_user_id %></dd>
+  <dt><strong>Dla</strong></dt>
+  <dd><%= @wz.user.name + " " + @wz.user.surname %></dd>
+  <dt><strong>Przedmiot</strong></dt>
+  <dd><%= @wz.item.name %></dd>
+  <dt><strong>Lokalizacja</strong></dt>
+  <dd><%= @wz.location.name %></dd>
+  <dt><strong>Status</strong></dt>
+  <dd><%= @wz.status.name %></dd>
+  <dt><strong>Opis</strong></dt>
+  <dd><%= @wz.description %></dd>
+</div>

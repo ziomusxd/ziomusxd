@@ -1,0 +1,52 @@
+<% if current_user.admin?%>
+
+<%- model_class = Wydanie -%>
+<div class="page-header">
+  <h2>Spis wydanych i odrzuconych</h2>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr class="active">
+	  <th>Numer</th>
+      <th>Zgłaszający</th>
+	  <th>Wydający</th>
+      <th>Towar</th>
+	  <th>Ilość</th>
+	  <th>Akceptacja</th>
+	  <th>Data zgłoszenia</th>
+	  <th>Data Aktualizacji</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @wydanies.each do |a| %>
+    <% if a.accept_id == 4 %>
+	<tr class="success">
+	  <td><%= a.id %></td>
+	  <td><%= a.user.name + " " + a.user.surname %></td>
+	  <td><%= a.accept_user %></td>
+	  <td><%= a.explo.name %></td>
+	  <td><%= a.quantity %></td>
+	  <td>Wydane</td>	
+	  <td><%= a.created_at.strftime("%d %b. %Y") %></td>
+      <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
+    </tr>
+	<% end %>
+    <% if a.accept_id == 3 %>
+	  <tr class="danger">
+	    <td><%= a.id %></td>
+	    <td><%= a.user.name + " " + a.user.surname %></td>
+	    <td><%= a.accept_user %></td>
+	    <td><%= a.explo.name %></td>
+	    <td><%= a.quantity %></td>
+	    <td>Odrzucone</td>	
+	    <td><%= a.created_at.strftime("%d %b. %Y") %></td>
+	    <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
+	  </tr> 
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+  redirect_to root_path
+<% end %>

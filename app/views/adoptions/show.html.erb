@@ -1,0 +1,29 @@
+
+<div class="page-header">
+  <h1>Przyjęcie eksploatacji</h1>
+</div>
+
+    <div class="row">
+      <div class="col-xs-8 col-sm-6">
+
+<dl class="dl-horizontal">
+<dt><%= link_to 'Wróć', (:back)%></dt><dd></dd>
+  <dt><strong>Przyjmujący</strong></dt>
+  <dd><%= @adoption.user.name + " " + @adoption.user.surname %></dd>
+  <% if current_user.admin?%> 
+    <dt><strong>Sn</strong></dt>
+    <dd><%= @adoption.explo.sn %></dd>
+    <dt><strong>Regał</strong></dt>
+    <dd><%= @adoption.explo.regal %></dd>
+    <dt><strong>Półka</strong></dt>
+    <dd><%= @adoption.explo.polka %></dd>
+    <dt><strong>Ilość</strong></dt>
+	<dd><%= @adoption.quantity%>
+	<dt><strong>Jednostka</strong></dt>
+	<dd><%= @adoption.explo.unit.name%>
+    <dt><strong>Uwagi</strong></dt>
+    <dd><%= @adoption.description %></dd>
+
+  <% end %>
+  <br>
+</div>

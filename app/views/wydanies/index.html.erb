@@ -1,0 +1,59 @@
+<%- model_class = Wydanie -%>
+<div class="page-header">
+  <h2>Zapotrzebowanie eksploatacji</h2>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr class="active">
+	  <th>Numer</th>
+      <th>Zgłaszający</th>
+	  <th>Wydający</th>
+      <th>Towar</th>
+	  <th>Ilość</th>
+	  <th>Akceptacja</th>
+	  <th>Data zgłoszenia</th>
+	  <th>Data Aktualizacji</th>
+	  <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% if current_user.admin? %>
+  <% @wydanies.each do |a| %>
+    <% if a.accept_id == 1 %>
+	  <tr class="warning">
+	    <td><%= a.id %></td>
+	    <td><%= a.user.name + " " + a.user.surname %></td>
+	    <td><%= a.accept_user %></td>
+	    <td><%= a.explo.name %></td>
+	    <td><%= a.quantity %></td>
+	    <td>Oczekuje</td>	
+	    <td><%= a.created_at.strftime("%d %b. %Y") %></td>
+	    <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
+		<td><%= link_to "Więcej", wydany_path(a) %>	<%= link_to "Edytuj", edit_wydany_path(a) %></td>	
+	  </tr> 
+    <% end %>	
+  <% end %>
+  </tbody>
+</table>
+ <% else %>
+   <% @wydanies.each do |a| %>
+     <% if a.accept_id == 1 %>
+	 <% if a.explo.category_id == 1 %>
+ 	  <tr class="warning">
+ 	    <td><%= a.id %></td>
+ 	    <td><%= a.user.name + " " + a.user.surname %></td>
+ 	    <td><%= a.accept_user %></td>
+ 	    <td><%= a.explo.name %></td>
+ 	    <td><%= a.quantity %></td>
+ 	    <td>Oczekuje</td>	
+ 	    <td><%= a.created_at.strftime("%d %b. %Y") %></td>
+ 	    <td><%= a.updated_at.strftime("%d %b. %Y") %></td>	
+ 		<td><%= link_to "Więcej", wydany_path(a) %>	<%= link_to "Edytuj", edit_wydany_path(a) %></td>	
+ 	  </tr> 
+	  <% end %>
+     <% end %>	
+   <% end %>
+   </tbody>
+ </table>
+ <% end %>

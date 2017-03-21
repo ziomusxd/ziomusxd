@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h1>Opis akcji</h1>
+</div>
+
+    <div class="row">
+      <div class="col-xs-8 col-sm-6">
+
+<dl class="dl-horizontal">
+<dt><%= link_to 'Wróć', (:back)%></dt><dd></dd>
+    <dt><strong>Zgłaszający</strong></dt>
+    <dd><%= @action.accident.user.name + " " + @action.accident.user.surname %></dd> 
+    <dt><strong>Opis awarii</strong></dt>
+    <dd><%= @action.accident.desctiption %></dd>
+    <dt><strong>Data zgłoszenia</strong></dt>
+    <dd><%= @action.accident.created_at %></dd>
+	<br>
+    <dt><strong>Aktualizował</strong></dt>
+    <dd><%= @action.user.name + " " + @action.user.surname %></dd> 
+    <dt><strong>Opis akcji</strong></dt>
+    <dd><%= @action.description %></dd>
+    <dt><strong>Data wykonania akcji</strong></dt>
+    <dd><%= @action.created_at %></dd>
+	<br>
+    <dt><strong>Lokalizacja</strong></dt>
+    <dd><%= @action.accident.location.name %></dd>
+    <dt><strong>Status</strong></dt>
+    <dd><%= @action.status.name %></dd>
+    <dt><strong>Tryb</strong></dt>
+    <dd><%= @action.accident.mode %></dd>
+	
+</div>

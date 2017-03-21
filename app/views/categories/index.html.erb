@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h2>Kategorie</h2>
+    <%= link_to "Wróć", root_path %>
+</div>
+
+<div class="col-xs-4 col-sm-6">
+  <% @categories.each do |category| %>
+    <dl class="dl-horizontal">
+      <dt><%= category.name %></dt>
+      <% @subcategories.each do |c| %>
+        <% if c.category_id == category.id %>
+		  <%# if Explo.where("subcategory_id= ?", c.id ).count(:id) != 0%>
+		    <dd><%=link_to c.name, subcategory_path(c) %> (<%= Explo.where("subcategory_id= ?", c.id ).count(:id)%>)</dd>
+ 	  	    <% @subsubcategories.each do |sc| %>
+	  		  <% if sc.subcategory_id == c.id %>
+			    <%# if Explo.where("subsubcategory_id= ?", sc.id ).count(:id) != 0%>
+	   	 	      <dd><li><p><%=link_to sc.name, subsubcategory_path(sc) %>  (<%= Explo.where("subsubcategory_id= ?", sc.id ).count(:id)%>)</p></li></dd>
+				<%# end %>
+	  	  	  <% end %>
+			<%# end %>
+	  	  <% end %>
+    	<% end %>
+      <% end %>
+    </dl>
+  <% end %>
+  <br>
+
+  
+</div>
+<div class="col-xs-4 col-sm-6">
+  <dl class="dl-horizontal">
+    <dt>Ilość ilości</dt>
+	<dd><%= @explos.sum(:quantity)%></dd>
+	<dt>Ilość pozycji</dt>
+	<dd><%= @explos.count(:id)%></dd>
+	<% if current_user.admin? %>
+	  <dt><%= link_to "Nowa kategoria", new_category_path %></dt>
+	  <dt><%= link_to "Nowa podkategoria", new_subcategory_path %></dt>
+	<% end %>
+  </dl>
+</div>
+

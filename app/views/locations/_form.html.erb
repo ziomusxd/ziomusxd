@@ -1,0 +1,21 @@
+<% provide(:title, 'Nowa lokalizacja') %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@location) do |f| %>
+  
+      <%= f.label "Miasto" %>
+      <%= f.text_field :city, class: 'form-control' %>
+	  
+      <%= f.label "Sala" %>
+      <%= f.text_field :hall, class: 'form-control' %><br>
+	  
+      <%= f.label "Adres" %>
+      <%= f.text_field :adress, class: 'form-control' %><br>
+
+      <%= f.submit "Dodaj/Zmień", class: "btn btn-primary" %><br>
+    <% end %>
+  </div>
+</div>
+
+
+

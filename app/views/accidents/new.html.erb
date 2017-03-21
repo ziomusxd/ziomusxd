@@ -1,0 +1,21 @@
+<% provide(:title, "New accident") %>
+<h2>Zgłoszenie awarii</h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@accident) do |f| %>
+
+      <%= f.label "Tryb" %>
+	  <%= f.select(:mode, [["Standard"], ["Pilne"], ["Przy okazji"]]) %><br>
+	  
+      <%= f.label "Lokalizacja" %>
+	  <%= f.collection_select :location_id, Location.all, :id, :name, prompt: true %><br>
+
+      <%= f.label "Opis awarii" %>
+      <%= f.text_area :desctiption, class: 'form-control' %><br>
+	  
+      <%= f.submit "Zgłoś", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

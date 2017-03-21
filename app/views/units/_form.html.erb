@@ -1,0 +1,7 @@
+<div class="col-md-6">
+    <%= form_for @unit, remote: true do |f|   %>
+    <%= f.text_field  :name     ,:placeholder => "Nazwa"                %>
+    <%= f.text_field  :unit     ,:placeholder => "Jednostka"                    %>
+    <%= f.button :Dodaj                           %>
+  <% end %>
+</div>

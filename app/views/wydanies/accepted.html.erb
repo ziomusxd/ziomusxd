@@ -1,0 +1,42 @@
+<% if current_user.admin?%>
+
+<%- model_class = Wydanie -%>
+<div class="page-header">
+  <h2>Eksploatacja do wydania</h2>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr class="active">
+	  <th>Numer</th>
+      <th>Zgłaszający</th>
+      <th>Towar</th>
+	  <th>SN</th>
+	  <th>Ilość</th>
+	  <th>Półka</th>
+	  <th>Regał</th>
+	  <th>Data zgłoszenia</th>
+	  <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @wydanies.each do |a| %>
+    <% if a.accept_id == 2 %>
+	  <tr class="active">
+	    <td><%= a.id %></td>
+	    <td><%= a.user.name + " " + a.user.surname %></td>
+	    <td><%= a.explo.name %></td>
+	    <td><%= a.explo.sn %></td>
+	    <td><%= a.quantity %></td>
+	    <td><%= a.explo.polka %></td>
+	    <td><%= a.explo.regal %></td>
+	    <td><%= a.created_at.strftime("%d %b. %Y") %></td>
+		<td><%= link_to "Edytuj", edit_wydany_path(a) %></td>	
+	  </tr> 
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+  redirect_to root_path
+<% end %>

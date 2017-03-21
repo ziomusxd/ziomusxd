@@ -1,0 +1,201 @@
+
+<div class="page-header">
+  <h1>Eksploatacja</h1>
+</div>
+
+    <div class="row">
+      <div class="col-xs-8 col-sm-6">
+<div class="col-xs-4 col-sm-6">
+<dl class="dl-horizontal">
+  <dt><% if @explo.category %>
+    <%= link_to "Wróć do #{@explo.category.name}", subcategory_path(@explo.category) %>
+  <% end %>
+  <% if @explo.subcategory %>
+    <%= link_to "Wróć do #{@explo.subcategory.name}", subcategory_path(@explo.subcategory) %>
+  <% end %>
+  <% if @explo.subsubcategory %>
+    <%= link_to "Wróć do #{@explo.subsubcategory.name}", subsubcategory_path(@explo.subsubcategory) %>
+  <% end %></dt>
+  <dd></dd>
+  
+  
+  <dt><strong>Nazwa</strong></dt>
+  <dd><%= @explo.name %></dd>
+  <% if current_user.admin?%> 
+    <dt><strong>Sn</strong></dt>
+    <dd><%= @explo.sn %></dd>
+    <dt><strong>Regał</strong></dt>
+    <dd><%= @explo.regal %></dd>
+    <dt><strong>Półka</strong></dt>
+    <dd><%= @explo.polka %></dd>
+    <dt><strong>Ilość</strong></dt>
+    <dd><%= @explo.quantity %></dd>
+    <dt><strong>Uwagi</strong></dt>
+    <dd><%= @explo.description %></dd>
+    <dt><strong>Kategoria</strong></dt>
+    <dd><%= @explo.unit.name %></dd>
+  <% end %>
+  <br>
+ 
+  
+</div>
+<div class="col-xs-4 col-sm-6">
+	<dt><%= link_to "Dodaj zdjęcie", edit_explo_path(@explo) %></dt>
+	<% if @explo.avatar? %>
+ <%= image_tag(@explo.avatar.url(:medium)) %>
+ <% end %>
+</div>
+	
+</div>
+  <div class="col-xs-4 col-sm-6">
+	  <div class="col-xs-2 col-sm-6">
+  <% if @explo.quantity >= 0 %>
+	<dt><strong>Zamówienie.</strong></dt>
+    <%= form_for(@wydanie) do |f| %>
+	
+	  <%= f.hidden_field :explo_id, :value => @explo.id %><br>
+	  
+      <%= f.label "Ilość" %>
+      <%= f.text_field :quantity, class: 'form-control' %>
+	  
+      <%= f.label "Uwagi" %>
+      <%= f.text_field :description, class: 'form-control' %><br>
+
+      <%= f.submit "Zamów", class: "btn btn-primary" %>
+	  
+    <% end %>
+	
+  <% else %>
+    <dt><strong>Brak materiałów na stanie, dodaj do listy zakupów.</strong></dt>
+    <%= form_for(@tobuy) do |f| %>
+	
+	<%= f.hidden_field :name, :value => @explo.name %>
+	
+	<%= f.hidden_field :quantity, :value => 0 %><br>
+
+    <%= f.label "Uwagi" %>
+    <%= f.text_field :desctiption, class: 'form-control' %><br>
+	
+	<%= f.submit "Dodaj do listy zakupów", class: "btn btn-primary" %>
+
+	<% end %>
+	
+  <% end %>
+</div>
+<div class="col-xs-2 col-sm-6">
+	<% if current_user.admin?%>
+   <dt><strong>Wprowadź na stan.</strong></dt>
+  <%= form_for(@adoption) do |f| %>
+
+    <%= f.hidden_field :explo_id, :value => @explo.id %><br>
+  
+    <%= f.label "Ilość" %>
+    <%= f.text_field :quantity, class: 'form-control' %>
+  
+    <%= f.label "Uwagi" %>
+    <%= f.text_field :description, class: 'form-control' %><br>
+
+    <%= f.submit "Wprowadź na stan", class: "btn btn-primary" %>
+  
+  <% end %>
+  <% end %>
+</div>
+</div>
+</div>
+
+
+  <% if current_user.admin?%>
+
+  <br>
+
+<center>
+    <div class="row">
+      <div class="col-xs-8 col-sm-6">
+		  <strong>Wydane: </strong>
+		  <%= Wydanie.where("explo_id = ? and accept_id = ?", @explo.id, "4").sum(:quantity)%>
+		  <%#= @wydanies.where(@wydanies.each do |w| w.accept_id == 4).sum(:quantity)%>
+		  <table class="table table-striped table-hover">
+		    <thead>
+		      <tr class="active">
+				<th>ID</th>
+		        <th>Ilość</th>
+		        <th>Kto</th>
+				<th>Data wydania</th>
+		      </tr>
+		    </thead>
+		   <tbody>
+		    <% @wydanies.each do |wydanie| %>
+			<% if wydanie.accept_id == 4%>
+		      <tr>
+				<td><%= wydanie.id %></td>
+		        <td>-<%= wydanie.quantity %></td>
+		        <td><%= wydanie.user.name %></td>
+				<td><%= wydanie.created_at.strftime("%d %b. %Y") %></td>
+				      </tr>
+		    <% end %>
+
+			<% end %>
+		  </tbody>
+		</table>
+      </div>
+      <div class="col-xs-4 col-sm-6">
+	     <strong>Przyjęte: </strong>
+		 <%= Adoption.where(explo: @explo.id).sum(:quantity)%>
+	     <table class="table table-striped table-hover">
+	       <thead>
+	         <tr class="active">
+	   		<th>ID</th>
+	           <th>Ilość</th>
+	           <th>Kto</th>
+	   		<th>Data wydania</th>
+	         </tr>
+	       </thead>
+	      <tbody>
+	       <% @adoptions.each do |adoption| %>
+	         <tr>
+	   		<td><%= adoption.id %></td>
+	   		<td><%= adoption.quantity %></td>
+	   		<td></td>
+	   		<td><%= adoption.created_at.strftime("%d %b. %Y") %></td>
+
+	   		      </tr>
+	       <% end %>
+	     </tbody>
+	   </table>
+      </div>
+    </div>
+</center>
+<% end %>
+<br>
+	  <table class="table table-striped table-hover">
+  	    <thead>
+    	  <tr class="active">
+      	    <th>Nazwa</th>
+      	  	<th>SN</th>
+	  	  	<% if current_user.admin?%> 
+      	  	  <th>Ilość</th>
+	  		  <th>Jednostka</th>
+	  		  <th>Regał</th>
+	  		  <th>Półka</th>
+        	  <th>Uwagi</th>
+	  		<% end %>
+      	    <th></th>
+    	  </tr>
+  		</thead>
+  	    <tbody>
+    	  <% @explos.each do |explo| %>
+      		<tr>
+        	  <td><%= explo.name.truncate(30) %></td>
+        	  <td><%= explo.sn.truncate(20) %></td>
+	    	  <% if current_user.admin?%> 
+           	    <td><%= explo.quantity %></td>
+		  	  	<td><%= explo.unit.unit %></td>
+		 	   	<td><%= explo.regal %></td>
+		  	  	<td><%= explo.polka %></td>
+          	  	<td><%= explo.description.truncate(20) %></td>
+			  <% end %>
+			  <td style="width:80px"> <%= link_to image_tag("http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/96/button-round-play-icon.png",:width=>30,:height=>30, :border=>0), explo_path(explo) %></td>
+     	 	</tr>
+    	  <% end %>
+  		</tbody>
+	  </table>

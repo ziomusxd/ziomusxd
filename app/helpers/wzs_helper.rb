@@ -1,0 +1,2 @@
+module WzsHelper
+end
